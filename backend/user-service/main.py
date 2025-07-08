@@ -7,6 +7,9 @@ if __name__ == "__main__":
 
 @app.get("/health")
 def healthCheck():
+    """
+    서버가 정상적으로 작동하는지 확인하는 API입니다.
+    """
     print("health check")
     return {"status": 200, "message": "OK"}
 
