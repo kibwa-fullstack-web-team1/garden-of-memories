@@ -1,4 +1,12 @@
 from fastapi import FastAPI
+import uvicorn
+
+from database import engine, Base
+from models import user # user 모델을 임포트하여 Base에 등록되도록 보장합니다.
+
+# 모든 테이블 생성
+Base.metadata.create_all(bind=engine)
+
 app = FastAPI()
 
 
