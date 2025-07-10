@@ -3,7 +3,7 @@ import uvicorn
 
 from database import engine, Base
 import models
-# from routers import question_router # 추후 라우터를 만들고 주석 해제
+from routers import question_router
 
 # 모든 테이블 생성
 Base.metadata.create_all(bind=engine)
@@ -14,7 +14,7 @@ app = FastAPI(
     version="0.1.0"
 )
 
-# app.include_router(question_router.router) # 추후 라우터를 만들고 주석 해제
+app.include_router(question_router.router)
 
 
 if __name__ == "__main__":
