@@ -1,5 +1,6 @@
 # documents
 documents/
+.cursor/
 
 # Python
 __pycache__/
