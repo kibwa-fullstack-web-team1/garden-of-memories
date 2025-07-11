@@ -3,7 +3,7 @@ import uvicorn
 
 from database import engine, Base
 import models # models 패키지를 임포트하여 모든 모델이 Base에 등록되도록 합니다.
-from routers import activity_router
+from routers import activity_router, user_router
 
 # 모든 테이블 생성
 Base.metadata.create_all(bind=engine)
@@ -11,6 +11,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 app.include_router(activity_router.router)
+app.include_router(user_router.router)
 
 
 if __name__ == "__main__":

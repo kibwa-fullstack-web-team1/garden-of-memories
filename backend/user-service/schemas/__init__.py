@@ -7,3 +7,8 @@ from schemas.activity_schema import (
     ActivityLog,
     ActivityLogWithDetails
 )
+from schemas.user_schema import (
+    UserBase,
+    UserCreate,
+    User
+)
