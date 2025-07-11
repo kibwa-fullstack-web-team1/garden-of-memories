@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 
 class StoryBase(BaseModel):
@@ -23,5 +23,23 @@ class StoryInDB(StoryBase):
     class Config:
         orm_mode = True
 
+# StorySegment 관련 스키마
+class StorySegmentBase(BaseModel):
+    order: int
+    segment_text: str
+
+class StorySegmentCreate(StorySegmentBase):
+    pass
+
+class StorySegmentInDB(StorySegmentBase):
+    id: int
+    story_id: int
+
+    class Config:
+        orm_mode = True
+
+class StorySegmentResponse(StorySegmentInDB):
+    pass
+
 class StoryResponse(StoryInDB):
-    pass 
+    segments: List[StorySegmentResponse] = [] 
