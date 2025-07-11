@@ -15,7 +15,7 @@ router = APIRouter(
 
 USER_SERVICE_URL = os.getenv("USER_SERVICE_URL", "http://localhost:8001") # user-service의 기본 URL
 
-@router.post("/", response_model=question_schema.Question)
+@router.post("", response_model=question_schema.Question)
 def create_question(question: question_schema.QuestionCreate, db: Session = Depends(get_db)):
     db_question = question_model.Question(content=question.content)
     db.add(db_question)
@@ -23,7 +23,7 @@ def create_question(question: question_schema.QuestionCreate, db: Session = Depe
     db.refresh(db_question)
     return db_question
 
-@router.get("/", response_model=List[question_schema.Question])
+@router.get("", response_model=List[question_schema.Question])
 def read_questions(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     questions = db.query(question_model.Question).offset(skip).limit(limit).all()
     return questions
@@ -68,7 +68,7 @@ def get_daily_question(db: Session = Depends(get_db)):
     return question
 
 
-@router.post("/answers/", response_model=question_schema.Answer)
+@router.post("/answers", response_model=question_schema.Answer)
 async def create_answer(answer: question_schema.AnswerCreate, db: Session = Depends(get_db)):
     # 1. user-service를 호출하여 user_id 유효성 검증
     async with httpx.AsyncClient() as client:
