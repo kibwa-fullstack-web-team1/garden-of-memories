@@ -1,1 +1,0 @@
-from models.upload_photo import FamilyPhoto

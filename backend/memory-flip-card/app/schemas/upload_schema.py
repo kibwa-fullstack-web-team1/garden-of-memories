@@ -1,5 +1,6 @@
 from pydantic import BaseModel, HttpUrl
 from datetime import datetime
+from pydantic.config import ConfigDict
 
 class FamilyPhotoBase(BaseModel):
     user_id: str
