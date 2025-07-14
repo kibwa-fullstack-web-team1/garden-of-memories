@@ -1,22 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
-from database import SessionLocal
-from models.upload_photo import FamilyPhoto
-from schemas.photo_schema import FamilyPhotoListResponse, PhotoItem
+
+
+from app.deps.db import get_db
+from app.models.upload_photo import FamilyPhoto
+from app.schemas.photo_schema import FamilyPhotoListResponse, PhotoItem
 
 router = APIRouter()
 
-# DB 세션을 가져오는 의존성
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
 #가족사진 목록 조회 API
-@router.get("/photo-list", response_model=FamilyPhotoListResponse)
+@router.get("/", response_model=FamilyPhotoListResponse)
 def get_family_photos(user_id: str = Query(...), db: Session = Depends(get_db)):
     photos = db.query(FamilyPhoto).filter(FamilyPhoto.user_id == user_id).all()
 
